@@ -1,0 +1,21 @@
+<%= simple_form_for @order do |f| %>    
+
+  <%= f.input :quote_id_noupdate, :label => t("Quote#"), :readonly => true, :input_html => {:value => @quote.id} %> 
+  <%= f.input :customer_name, :label => t('Customer'), :readonly => true, :input_html => {:value => @rfq.customer.name} %>
+  <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @rfq.drawing_num}  %> 
+  <%= f.input :unit_price, :label => t("Unit Price($)"), :readonly => true, :input_html => {:value => @quote.try(:unit_price)} %> 
+  <%= f.input :product_wt, :label => t("Product WT(g)"), :readonly => true, :input_html => {:value => @rfq.try(:product_wt)} %>
+  <%= f.input :order_date, :label => t("Order Date"), :as => :string %> 
+  <%= f.input :qty, :label => t("Qty") %>
+  <%= f.input :order_total, :label => t("Order Total"), :readonly => true %> 
+  <%= f.input :order_wt, :label => t("Order WT(kg)"), :readonly => true %>
+  <%= f.input :order_requirement, :label => t("Order Requirement"), :input_html => {:rows => 4} %> 
+  <%= f.input :customer_po, :label => t("PO#") %> 
+  <%= f.input :delivery_date, :label => t("Delivery Date"), :as => :string %> 
+  <%= f.input :shipping_date, :label => t("Shipping Date"), :as => :string %> 
+  <%= f.input :expedite, :label => t('Expedite'), :as => :boolean %>
+  <%= f.input :sample_required, :label => t("Require Sample?"), :as => :boolean %> 
+  <%#= f.input :executioner_id, :collection => Authentify::UsersHelper::return_users('sales', params[:controller]), :label => t("Executioner"),:label_method => :name, :value_method => :id, :include_blank => true %>
+  
+  <%= f.button :submit, t('Save') %>  
+<% end %>

@@ -1,0 +1,89 @@
+<div id="main_body">
+<h4><%=t('Order Info') %></h4>
+
+<p>
+  <b><%= t('Customer') %></b>
+  <%= @rfq.customer.name %>
+</p>
+<p>
+  <b><%= t('Product Name') %></b>
+  <%= @rfq.product_name %>
+</p>
+<p>
+  <b><%= t('Drawing#') %></b>
+  <%= @rfq.drawing_num %>
+</p>
+<p>
+  <b><%= t('Quote#') %></b>
+  <%= @order.quote_id %>
+</p>
+<p>
+  <b><%= t('Unit Price') %></b>
+  <%= @order.quote.unit_price %>
+</p>
+<p>
+  <b><%= t('Order Date') %></b>
+  <%= @order.order_date.strftime("%Y/%m/%d") %>
+</p>
+
+<p>
+  <b><%= t('Order Requirement') %></b>
+  <%= @order.order_requirement %>
+</p>
+<p>
+  <b><%= t('Qty')  %></b>
+  <%= @order.qty %>
+</p>
+<p>
+  <b><%= t('Order Total')  %></b>
+  <%= number_with_precision(@order.qty * @order.quote.unit_price, :precision => 2) %>
+</p>
+<p>
+  <b><%= t('Order WT(kg)')  %></b>
+  <%= number_with_precision(@order.qty * @rfq.product_wt/1000.00, :precision => 2) %>
+</p>
+<p>
+  <b><%= t('Delivery Date') %></b>
+  <%= @order.delivery_date.strftime("%Y/%m/%d") %>
+</p>
+<p>
+  <b><%= t('Shipping Date') %></b>
+  <%= @order.shipping_date.strftime("%Y/%m/%d") if @order.shipping_date.present? %>
+</p>
+
+<p>
+  <b><%= t('Cancelled') %></b>
+  <%= @order.cancelled ? t('Yes') : t('No') %>
+</p>
+<p>
+  <b><%= t('Expedite') %></b>
+  <%= @order.expedite ? t('Yes') : t('No') %>
+</p>
+<p>
+  <b><%= t('Completed') %></b>
+  <%= @order.completed ? t('Yes') : t('No') %>
+</p>
+<p>
+  <b><%= t('Sample Required?') %></b>
+  <%= @order.sample_required ? t('Yes') : t('No') %>
+</p>
+<p>
+  <b><%= t('Executioner') %></b>
+  <%= @order.executioner.name if @order.executioner_id.present? %>
+</p>
+<p>
+  <b><%= t('Last Updated By') %></b>
+  <%= @rfq.last_updated_by.name %>
+</p>
+<p>
+  <b>LOG：</b>
+  <% Commonx::Log.where('resource_id = ? AND resource_name = ?', @order.id, params[:controller].sub('/', '_')).order("created_at DESC").each do |t| %>
+    <li><%= t.created_at.strftime("%Y/%m/%d") %>,&nbsp; <%= t.last_updated_by.name %>,&nbsp; <%= t.log %> </li>
+  <% end %>
+</p>
+
+  <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :id => 'close', :class => BUTTONS_CLS['action'] %>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= link_to t('New Log'), SUBURI + commonx.new_log_path(:resource_id => @order.id, :resource_name => params[:controller], :subaction => 'order', :format => :js), :remote => true, 
+                          :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_order', 'commonx/logs') %>    	
+</div>

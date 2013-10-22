@@ -1,0 +1,55 @@
+<div class="pagination"><%= will_paginate models %></div>
+    <table class="table table-striped">
+		<tr>
+			<th><%= t('#') %></th>
+			<th><%= t('Order Date') %></th>
+			<th><%= t('Customer') %></th>
+			<th><%= t('Product Name/Drawing#') %></th>
+			<th><%= t('Qty') %></th>	
+			<th><%= t('Delivery Date') %></th>
+			<th><%= t('Shipping Date') %></th>			
+			<th><%= t('Completed?') %></th>
+			<th><%= t('Sample?') %></th>
+			<th><%= t('Last Updated By') %></th>
+			<th></th>
+			<th></th>
+			
+		</tr>
+		<% models.each do |r| %>
+		  <tr>
+		  	<% unless has_action_right?('show', params[:controller], r) %>
+		  	  <td><%= prt(r, :id) %></td>
+		  	<% else %>
+		  	  <td><%= link_to r.id.to_s, SUBURI + "/authentify/view_handler?index=1&url=#{order_path(r)}" %></td>
+		  	<% end %>
+		  	<td><%= r.order_date.strftime("%Y/%m/%d") %></td>
+		  	<td><%= MfgOrderx.rfq_class.find_by_id(r.rfq_id).customer.name %></td>
+		  	<% rfq = MfgOrderx.rfq_class.find_by_id(r.rfq_id) %>
+		  	<% if has_action_right?('show', MfgOrderx.rfq_class.to_s.underscore.pluralize, rfq) %>
+			  <td><%= link_to rfq.product_name + ' ' + rfq.drawing_num, SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(eval(MfgOrderx.show_rfq_path))}" %></td>
+			<% else %>
+			  <td><%= rfq.product_name + ' ' + rfq.drawing_num %></td>
+			<% end %>
+			<td><%= prt(r, :qty) %></td>
+			<td><%= r.delivery_date.strftime("%Y/%m/%d") %></td>
+			<td><%= r.shipping_date.strftime("%Y/%m/%d") %></td> 
+			<td><%= r.completed ? t('Yes') : t('No') %></td>
+			<td><%= r.sample_required ? t('Yes') : t('No') %></td>
+			<td><%= prt(r, 'last_updated_by.name') %></td>    
+			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_order_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>
+			<td><%#= link_to t('Samples'), SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(event_taskx.event_tasks_path(:resource_id => r.id, :resource_string => params[:controller], :subaction => 'rfq_quote'))}", :class => BUTTONS_CLS['action']  if has_action_right?('index_rfq_quote', 'event_taskx/event_tasks', r) %></td>
+			
+		  </tr>
+		<% end %>
+	</table>
+	
+	<table class="table table-striped">
+	  <tr>
+	    <th>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action']  %>
+	    	<%= link_to t('New Order'), SUBURI + "/authentify/view_handler?index=1&url=#{CGI::escape new_order_path(:quote_id => @quote.id, :parent_record_id => @quote.id, :parent_resource => MfgOrderx.quote_class.to_s.underscore.pluralize) }", :class => BUTTONS_CLS['action']  if @quote && has_action_right?('create', params[:controller], @quote) %>
+	    </th>
+	  </tr>
+	</table>
+	
