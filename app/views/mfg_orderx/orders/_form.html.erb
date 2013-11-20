@@ -1,3 +1,7 @@
+<% if false %>
+  <%= render inline: ERB.new(@erb_code).result(binding) %>
+  
+<% else %>
 <%= simple_form_for @order do |f| %>    
 
   <%= f.input :quote_id_noupdate, :label => t("Quote#"), :readonly => true, :input_html => {:value => @quote.id} %> 
@@ -13,7 +17,7 @@
   <%= f.input :customer_po, :label => t("PO#") %> 
   <%= f.input :delivery_date, :label => t("Delivery Date"), :as => :string %> 
   <%= f.input :shipping_date, :label => t("Shipping Date"), :as => :string %>   
-  <% if readonly?(@order, 'completed')%>
+  <% if readonly?(@order, 'expedite')%>
      <%= f.input :expedite_noupdate, :label => t('Expedite'), :readonly => true, :required => false, :input_html => {:value => @order.expedite} %>
   <% else %>
      <%= f.input :expedite, :label => t('Expedite'), :as => :boolean %>
@@ -23,7 +27,7 @@
   <% else %>
      <%= f.input :cancelled, :label => t('Cancelled'), :as => :boolean %>
   <% end %>
-  <% if readonly?(@order, 'completed')%>
+  <% if readonly?(@order, 'sample_required')%>
      <%= f.input :sample_required_noupdate, :label => t('Require Sample?'), :readonly => true, :required => false, :input_html => {:value => @order.sample_required} %>
   <% else %>
      <%= f.input :sample_required, :label => t("Require Sample?"), :as => :boolean %> 
@@ -34,6 +38,9 @@
      <%= f.input :completed, :label => t('Completed'), :as => :boolean %>
   <% end %>
   <%#= f.input :executioner_id, :collection => Authentify::UsersHelper::return_users('sales', params[:controller]), :label => t("Executioner"),:label_method => :name, :value_method => :id, :include_blank => true %>
+  
   <%= link_to t('Back'), SUBURI + "/authentify/view_handler?index=0", :class => BUTTONS_CLS['action'] %>
   <%= f.button :submit, t('Save') %>  
+<% end %>
+
 <% end %>

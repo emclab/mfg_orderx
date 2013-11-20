@@ -25,7 +25,7 @@ module MfgOrderx
       @order = MfgOrderx::Order.new(params[:order], :as => :role_new)
       @order.last_updated_by_id = session[:user_id]
       if @order.save
-        redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
         flash[:notice] = t('Data Error. Not Saved!')
         render 'new'
@@ -42,7 +42,7 @@ module MfgOrderx
       @order = MfgOrderx::Order.find_by_id(params[:id])
       @order.last_updated_by_id = session[:user_id]
       if @order.update_attributes(params[:order], :as => :role_update)
-        redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
+        redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
         flash[:notice] = t('Data Error. Not Updated!')
         render 'edit'

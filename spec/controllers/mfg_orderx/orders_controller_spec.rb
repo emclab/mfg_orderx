@@ -82,7 +82,7 @@ module MfgOrderx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         q = FactoryGirl.attributes_for(:mfg_orderx_order, :quote_id => @quote.id)
         get 'create', {:use_route => :mfg_orderx, :quote_id => @quote.id, :order => q}
-        response.should redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       end
       
       it "should render new with data error" do
@@ -116,7 +116,7 @@ module MfgOrderx
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         q = FactoryGirl.create(:mfg_orderx_order, :quote_id => @quote1.id)
         get 'update', {:use_route => :mfg_orderx, :id => q.id, :order => {:order_requirement => 'steel 201'}}
-        response.should redirect_to CGI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
+        response.should redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       end
       
       it "should render edit with data error" do
@@ -125,7 +125,7 @@ module MfgOrderx
         session[:user_id] = @u.id
         session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(@u.id)
         q = FactoryGirl.create(:mfg_orderx_order, :quote_id => @quote.id)
-        get 'update', {:use_route => :mfg_processx, :id => q.id, :order => {:qty => 0}}
+        get 'update', {:use_route => :mfg_orderx, :id => q.id, :order => {:qty => 0}}
         response.should render_template('edit')
       end
     end

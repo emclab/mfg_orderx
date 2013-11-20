@@ -1,3 +1,7 @@
+<% if false %>
+  <%= render inline: ERB.new(@erb_code).result(binding) %>
+  
+<% else %>
 <div id="main_body">
 <h4><%=t('Order Info') %></h4>
 
@@ -73,7 +77,7 @@
 </p>
 <p>
   <b><%= t('Last Updated By') %></b>
-  <%= @rfq.last_updated_by.name %>
+  <%= @order.last_updated_by.name %>
 </p>
 <p>
   <b>LOG：</b>
@@ -87,3 +91,5 @@
 		<%= link_to t('New Log'), SUBURI + commonx.new_log_path(:resource_id => @order.id, :resource_name => params[:controller], :subaction => 'order', :format => :js), :remote => true, 
                           :id => 'new_log_link', :class => BUTTONS_CLS['action'] if has_action_right?('create_order', 'commonx/logs') %>    	
 </div>
+
+<% end %>
