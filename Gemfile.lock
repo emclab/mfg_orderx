@@ -114,6 +114,20 @@ PATH
       uglifier
       will_paginate
 
+PATH
+  remote: ../order_samplex
+  specs:
+    order_samplex (3.2.12.01)
+      coffee-rails (~> 3.2.1)
+      database_cleaner
+      execjs
+      jquery-rails
+      rails (= 3.2.12)
+      sass-rails (~> 3.2.3)
+      simple_form
+      uglifier
+      will_paginate
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -271,6 +285,7 @@ DEPENDENCIES
   launchy
   mfg_orderx!
   mfg_processx!
+  order_samplex!
   rspec-rails (>= 2.0.0)
   sqlite3
   will_paginate
