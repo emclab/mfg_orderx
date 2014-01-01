@@ -4,8 +4,9 @@
 <% else %>
 <%= simple_form_for @order do |f| %>    
 
-  <%= f.input :quote_id_noupdate, :label => t("Quote#"), :readonly => true, :input_html => {:value => @quote.id} %> 
+  <%= f.input :quote_id, :label => t("Quote#"), :readonly => true, :input_html => {:value => @quote.id} %> 
   <%= f.input :customer_name, :label => t('Customer'), :readonly => true, :input_html => {:value => @rfq.customer.name} %>
+  <%= f.input :rfq_id, :as => :hidden, :input_html => {:value => @rfq.id} %>
   <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @rfq.drawing_num}  %> 
   <%= f.input :unit_price, :label => t("Unit Price($)"), :readonly => true, :input_html => {:value => @quote.try(:unit_price)} %> 
   <%= f.input :product_wt, :label => t("Product WT(g)"), :readonly => true, :input_html => {:value => @rfq.try(:product_wt)} %>

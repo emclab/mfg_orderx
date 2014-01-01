@@ -27,6 +27,8 @@ module MfgOrderx
       if @order.save
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Saved!")
       else
+        @rfq = MfgOrderx.rfq_class.find_by_id(params[:order][:rfq_id]) if params[:order].present? && params[:order][:rfq_id].present?
+        @quote = MfgOrderx.quote_class.find_by_id(params[:order][:quote_id]) if params[:order].present? && params[:order][:quote_id].present?
         flash[:notice] = t('Data Error. Not Saved!')
         render 'new'
       end
