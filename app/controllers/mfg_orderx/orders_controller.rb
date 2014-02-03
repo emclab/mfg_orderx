@@ -12,13 +12,13 @@ module MfgOrderx
       @orders = @orders.where(:rfq_id => @rfq.id) if @rfq
       @orders = @orders.where(:quote_id => @quote.id) if @quote
       @orders = @orders.page(params[:page]).per_page(@max_pagination)
-      @erb_code = find_config_const('order_index_view', 'mfg_orderx_orders')
+      @erb_code = find_config_const('order_index_view', 'mfg_orderx')
     end
   
     def new
       @title = t('New Order')
       @order = MfgOrderx::Order.new()
-      @erb_code = find_config_const('order_new_view', 'mfg_orderx_orders')
+      @erb_code = find_config_const('order_new_view', 'mfg_orderx')
     end
   
     def create
@@ -37,7 +37,7 @@ module MfgOrderx
     def edit
       @title = t('Update Order')
       @order = MfgOrderx::Order.find_by_id(params[:id])
-      @erb_code = find_config_const('order_edit_view', 'mfg_orderx_orders')
+      @erb_code = find_config_const('order_edit_view', 'mfg_orderx')
     end
   
     def update
@@ -54,7 +54,7 @@ module MfgOrderx
     def show
       @title = t('Order Info')
       @order = MfgOrderx::Order.find_by_id(params[:id])
-      @erb_code = find_config_const('order_show_view', 'mfg_orderx_orders')
+      @erb_code = find_config_const('order_show_view', 'mfg_orderx')
     end
     
     protected

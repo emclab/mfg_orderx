@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   mount OrderSamplex::Engine => '/samplex'
   mount EventTaskx::Engine => '/event_taskx'
   mount Searchx::Engine => '/searchx'
+  mount StateMachineLogx::Engine => '/sm_log'
+  mount BizWorkflowx::Engine => '/biz_wf'
   
   resource :session
   

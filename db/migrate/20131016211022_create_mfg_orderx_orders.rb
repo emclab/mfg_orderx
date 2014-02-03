@@ -4,6 +4,7 @@ class CreateMfgOrderxOrders < ActiveRecord::Migration
       t.integer :rfq_id
       t.integer :quote_id
       t.string :wfid
+      t.string :wf_state
       t.date :order_date
       t.date :delivery_date
       t.date :shipping_date
@@ -24,5 +25,6 @@ class CreateMfgOrderxOrders < ActiveRecord::Migration
     add_index :mfg_orderx_orders, :customer_po
     add_index :mfg_orderx_orders, :rfq_id
     add_index :mfg_orderx_orders, :wfid
+    add_index :mfg_orderx_orders, :wf_state
   end
 end

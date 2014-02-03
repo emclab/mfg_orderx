@@ -17,5 +17,6 @@ FactoryGirl.define do
     customer_po "MyString"
     sample_required false
     executioner_id 1
+    wf_state ''
   end
 end
