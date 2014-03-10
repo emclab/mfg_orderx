@@ -20,6 +20,6 @@ module MfgOrderx
                          :numericality => {:greater_than => 0}
     validates :qty, :presence => true,
                     :numericality => {:greater_than => 0, :message => I18n.t('Qty > 0')}                     
-    validates_presence_of :customer_po, :order_date
+    validates_presence_of :order_date
   end
 end

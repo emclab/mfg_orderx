@@ -11,7 +11,7 @@
   <%= f.input :product_wt, :label => t("Product WT(g)"), :readonly => true, :input_html => {:value => @rfq.product_wt}%>  
   <%= f.input :order_date, :label => t("Order Date"), :as => :string %> 
   <%= f.input :qty, :label => t("Qty") %> 
-  <%= f.input :order_total, :label => t("Order Total"), :readonly => true %> 
+  <%= f.input :order_total, :label => t("Order Total($)"), :readonly => true %> 
   <%= f.input :order_wt, :label => t("Order WT(kg)"), :readonly => true %>
   <%= f.input :order_requirement, :label => t("Order Requirement"), :input_html => {:rows => 4} %> 
   <%= f.input :customer_po, :label => t("PO#") %> 
