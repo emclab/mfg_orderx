@@ -45,4 +45,5 @@ zh-CN:
   Delivery Date : '交货日期'
   Shipping Date : '发货日期'
   Require Sample? : '需要样品？'
-  Order WT(Kg) : '订单重量(kg)'
+  Order WT(kg) : '订单重量(kg)'
+  Mfg Batches : '生产批次一览'
