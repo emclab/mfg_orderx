@@ -5,10 +5,11 @@
 <div class="pagination"><%= will_paginate models %></div>
     <table class="table table-striped">
 		<tr>
-			<th><%= t('#') %></th>
+			<th>#</th>
 			<th><%= t('Order Date') %></th>
 			<th><%= t('Customer') %></th>
-			<th><%= t('Product Name/Drawing#') %></th>
+			<th><%= t('Product Name') %></th>
+			<th><%= t('Drawing#') %></th>
 			<th><%= t('Qty') %></th>	
 			<th><%= t('Delivery Date') %></th>
 			<th><%= t('Shipping Date') %></th>			
@@ -32,16 +33,17 @@
 		  	<% if has_action_right?('show', MfgOrderx.rfq_class.to_s.underscore.pluralize, rfq) %>
 			  <td><%= link_to rfq.product_name + ' ' + rfq.drawing_num, SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(eval(MfgOrderx.show_rfq_path))}" %></td>
 			<% else %>
-			  <td><%= rfq.product_name + ' ' + rfq.drawing_num %></td>
+			  <td><%= rfq.product_name %></td>
 			<% end %>
+			<td><%= prt(r, :drawing_num) %></td>
 			<td><%= prt(r, :qty) %></td>
 			<td><%= r.delivery_date.strftime("%Y/%m/%d") %></td>
 			<td><%= r.shipping_date.strftime("%Y/%m/%d") %></td> 
 			<td><%= r.completed ? t('Yes') : t('No') %></td>
 			<td><%= r.sample_required ? t('Yes') : t('No') %></td>
 			<td><%= prt(r, 'last_updated_by.name') %></td>    
-			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_order_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>
 			<td><%= link_to t('Samples'), SUBURI + "/authentify/view_handler?index=1&url=#{SUBURI + CGI::escape(eval(MfgOrderx.sample_index_path))}", :class => BUTTONS_CLS['action'] %></td>
+			<td><%= link_to t('Edit'), SUBURI + "/authentify/view_handler?index=1&url=#{edit_order_path(r)}", :class => BUTTONS_CLS['action']  if has_action_right?('update', params[:controller], r) %></td>
 			
 		  </tr>
 		<% end %>

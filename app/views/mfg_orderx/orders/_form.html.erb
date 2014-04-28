@@ -6,7 +6,8 @@
 
   <%= f.input :quote_id_noupdate, :label => t("Quote#"), :readonly => true, :input_html => {:value => @quote.id} %> 
   <%= f.input :customer_name, :label => t('Customer'), :readonly => true, :input_html => {:value => @rfq.customer.name} %>
-  <%= f.input :product_info, :label => t("Product Info"), :readonly => true, :input_html => {:value => @rfq.product_name + ' ' + @rfq.drawing_num}  %>
+  <%= f.input :product_info, :label => t("Product Name"), :readonly => true, :input_html => {:value => @rfq.product_name }  %> 
+  <%= f.input :drawing_num, :label => t("Drawing#"), :readonly => readonly?(@order, 'drawing_num')  %> 
   <%= f.input :unit_price, :label => t("Unit Price"), :readonly => true, :input_html => {:value => @quote.unit_price}%> 
   <%= f.input :product_wt, :label => t("Product WT(g)"), :readonly => true, :input_html => {:value => @rfq.product_wt}%>  
   <%= f.input :order_date, :label => t("Order Date"), :as => :string %> 
