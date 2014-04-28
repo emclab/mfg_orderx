@@ -13,9 +13,9 @@ module MfgOrderx
                     :as => :role_update
                     
     attr_accessor :customer_id_s, :start_date_s, :end_date_s, :time_frame_s, :drawing_num_s, :delivery_date_s, :rfq_id_s, :completed_s, :id_s, 
-                  :cancelled_s
+                  :cancelled_s, :order_date_s, :shipping_date_s
     attr_accessible :customer_id_s, :start_date_s, :end_date_s, :time_frame_s, :drawing_num_s, :delivery_date_s, :rfq_id_s, :completed_s, :id_s, 
-                    :cancelled_s,
+                    :cancelled_s,  :order_date_s, :shipping_date_s,
                     :as => :role_search_stats                
     
     belongs_to :last_updated_by, :class_name => 'Authentify::User'

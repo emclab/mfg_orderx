@@ -6,6 +6,14 @@ $(function() {
    $("#order_shipping_date").datepicker({dateFormat: 'yy-mm-dd'});
 });
 
+$(function() {
+   $("#order_start_date_s").datepicker({dateFormat: 'yy-mm-dd'});
+   $("#order_end_date_s").datepicker({dateFormat: 'yy-mm-dd'});
+   $("#order_order_date_s").datepicker({dateFormat: 'yy-mm-dd'});
+   $("#order_delivery_date_s").datepicker({dateFormat: 'yy-mm-dd'});
+   $("#order_shipping_date_s").datepicker({dateFormat: 'yy-mm-dd'});
+});
+
 $(function (){
 	$('#order_qty').change(function(){
 		$('#order_order_total').val(OrderTotal());
