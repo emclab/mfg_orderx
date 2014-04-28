@@ -11,6 +11,13 @@ module MfgOrderx
                     :product_info, :customer_name, :expedite_noupdate, :cancelled_noupdate, :completed_noupdate, :sample_required_noupdate, :quote_id_noupdate, 
                     :quote_unit_price, :order_total, :order_wt, :unit_price, :product_wt, :id_noupdate, :wf_comment,
                     :as => :role_update
+                    
+    attr_accessor :customer_id_s, :start_date_s, :end_date_s, :time_frame_s, :drawing_num_s, :delivery_date_s, :rfq_id_s, :completed_s, :id_s, 
+                  :cancelled_s
+    attr_accessible :customer_id_s, :start_date_s, :end_date_s, :time_frame_s, :drawing_num_s, :delivery_date_s, :rfq_id_s, :completed_s, :id_s, 
+                    :cancelled_s,
+                    :as => :role_search_stats                
+    
     belongs_to :last_updated_by, :class_name => 'Authentify::User'
     belongs_to :executioner, :class_name => 'Authentify::User' 
     belongs_to :rfq, :class_name => MfgOrderx.rfq_class.to_s
