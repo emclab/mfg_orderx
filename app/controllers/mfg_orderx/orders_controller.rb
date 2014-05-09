@@ -29,6 +29,7 @@ module MfgOrderx
       else
         @rfq = MfgOrderx.rfq_class.find_by_id(params[:order][:rfq_id]) if params[:order].present? && params[:order][:rfq_id].present?
         @quote = MfgOrderx.quote_class.find_by_id(params[:order][:quote_id]) if params[:order].present? && params[:order][:quote_id].present?
+        @erb_code = find_config_const('order_new_view', 'mfg_orderx')
         flash[:notice] = t('Data Error. Not Saved!')
         render 'new'
       end
@@ -46,6 +47,7 @@ module MfgOrderx
       if @order.update_attributes(params[:order], :as => :role_update)
         redirect_to URI.escape(SUBURI + "/authentify/view_handler?index=0&msg=Successfully Updated!")
       else
+        @erb_code = find_config_const('order_edit_view', 'mfg_orderx')
         flash[:notice] = t('Data Error. Not Updated!')
         render 'edit'
       end
